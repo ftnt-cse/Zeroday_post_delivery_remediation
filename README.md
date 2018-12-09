@@ -1,6 +1,6 @@
 # Zeroday_post_delivery_remediation
 a post delivery remediate a zero day malware attack
-
+![Scenario Diagram](https://user-images.githubusercontent.com/39757299/49695378-9e65f580-fbb3-11e8-9a91-52e605ab5624.png)
 
  A demo scenario revolving around FortiSIEM remediating an attack in which a malicious email with zero day malware was sent from within the organization using stolen credentials.
 
