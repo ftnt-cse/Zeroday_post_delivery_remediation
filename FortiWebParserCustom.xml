@@ -1,0 +1,229 @@
+<!--
+<189>date=2017-08-27 time=19:02:02 log_id=30000000 msg_id=000000023245 device_id=FVVM040000105149 vd="root" timezone="(GMT+4:00)Abu Dhabi,Muscat" type=traffic subtype="http" pri=notice proto=tcp service=https status=success reason=none policy=ExchangeInspection src=192.168.11.5 src_port=38740 dst=10.168.11.8 dst_port=443 http_request_time=13 http_response_time=0 http_request_bytes=3963450 http_response_bytes=1908 http_method=post http_url="/owa/service.svc?action=CreateAttachmentFromLocalFile&ID=-35&AC=1" http_agent="Mozilla/5.0 (X11; Linux i686; rv:31.0) Gecko/20100101 Firefox/31.0 Iceweasel/31.8.0" http_retcode=200 msg="HTTPS post request from 192.168.11.5:38740 to 10.168.11.8:443" srccountry="Reserved" content_switch_name="none" server_pool_name="exchange-server-internal" http_host="webmail.fortielab.com" user_name="fortielab\obama" http_refer="https://webmail.fortielab.com/owa/" http_version="1.x" dev_id=none
+<185>date=2017-08-27 time=19:03:05 log_id=20000055 msg_id=000000023257 device_id=FVVM040000105149 vd="root" timezone="(GMT+4:00)Abu Dhabi,Muscat" type=attack subtype="fsa_detection" pri=alert trigger_policy="" severity_level=Low proto=tcp service=https action=Alert policy="ExchangeInspection" src=192.168.11.5 src_port=38740 dst=10.168.11.8 dst_port=443 http_method=post http_url="/owa/service.svc?action=CreateAttachmentFromLocalFile&ID=-35&AC=1" http_host="webmail.fortielab.com" http_agent="none" http_session_id=none msg="filename [file.tar.bz2] risk level [malicious] details [N/A]: FortiSandbox file detection" signature_subclass="N/A" signature_id="N/A" srccountry="Reserved" content_switch_name="none" server_pool_name="exchange-server-internal" false_positive_mitigation="none" user_name="Unknown" monitor_status="Disabled" http_refer="none" http_version="1.x" dev_id="none" threat_weight=0 history_threat_weight=0 threat_level=Off
+<189>date=2017-08-27 time=22:05:27 log_id=30000000 msg_id=000000023646 device_id=FVVM040000105149 vd="root" timezone="(GMT+4:00)Abu Dhabi,Muscat" type=traffic subtype="http" pri=notice proto=tcp service=https status=success reason=none policy=ExchangeInspection src=10.168.11.254 src_port=54750 dst=10.168.11.8 dst_port=443 http_request_time=0 http_response_time=3155 http_request_bytes=2506 http_response_bytes=2482 http_method=get http_url="/owa/ev.owa2?ns=PendingRequest&ev=PendingNotificationRequest&UA=0&cid=85378fd1-2049-4392-8efd-048cc58ecab3&X-OWA-CANARY=kHp9SlQuxkKvHRQeF2pJuxDyfHN17dQIIMZ3WQJ2YYWoFMueypNiQ8I4XXL07jZtXu4iXsg8oAw.&n=2c" http_agent="Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:42.0) Gecko/20100101 Firefox/42.0" http_retcode=200 msg="HTTPS get request from 10.168.11.254:54750 to 10.168.11.8:443" srccountry="Reserved" content_switch_name="none" server_pool_name="exchange-server-internal" http_host="webmail.fortielab.com" user_name="fortielab\obama" http_refer="none" http_version="1.x" dev_id=none
+<190>date=2017-08-27 time=21:57:45 log_id=11009002 msg_id=000000023639 device_id=FVVM040000105149 vd="root" timezone="(GMT+4:00)Abu Dhabi,Muscat" type=event subtype="system" pri=information trigger_policy="" user=daemon ui=daemon action=update status=success msg="download malware pkg new_version (2.913) from FortiSandbox"
+<185>date=2017-08-27 time=21:21:06 log_id=20000030 msg_id=000000023553 device_id=FVVM040000105149 vd="root" timezone="(GMT+4:00)Abu Dhabi,Muscat" type=attack subtype="waf_custom_access" pri=alert trigger_policy="" severity_level=High proto=tcp service=https action=Alert policy="ExchangeInspection" src=198.51.100.254 src_port=50363 dst=10.168.11.8 dst_port=443 http_method=post http_url="/owa/service.svc?action=GetMailTips&EP=1&ID=-35&AC=1" http_host="webmail.fortielab.com" http_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:55.0) Gecko/20100101 Firefox/55.0" http_session_id=538515F6ICGWVANT9GGATAPAXM7S0298 msg="Owa-Recipient-Email : Custom Access Violation" signature_subclass="N/A" signature_id="N/A" srccountry="Unknown" content_switch_name="none" server_pool_name="exchange-server-internal" false_positive_mitigation="none" user_name="fortielab\mnaili" monitor_status="Disabled" http_refer="none" http_version="1.x" dev_id="none" threat_weight=30 history_threat_weight=0 threat_level=High
+<190>date=2017-08-27 time=21:22:01 log_id=11009001 msg_id=000000023561 device_id=FVVM040000105149 vd="root" timezone="(GMT+4:00)Abu Dhabi,Muscat" type=event subtype="system" pri=information trigger_policy="" user=daemon ui=daemon action=sandbox-send-file status=success msg="Suspicious file Travel_and_Expense_Policy.pdf (667558 bytes) has been sent to FortiSandbox"  
+-->
+<eventFormatRecognizer><![CDATA[\s(?:device_id|devid)=(?:FV|FVVM)-?\d\w*\s]]></eventFormatRecognizer>
+<patternDefinitions>
+    <pattern name="pat5Digit"><![CDATA[\d{5}]]></pattern>
+ <!--   <pattern name="patFileName"><![CDATA[[\[(.*?)\]]]></pattern> -->
+    <pattern name="patFileName"><![CDATA[[\w+\.*\w*\.*\w*]]></pattern>
+    <pattern name="patStrSingleQuote"><![CDATA[[^']*]]></pattern>
+</patternDefinitions>
+<parsingInstructions>
+    <collectFieldsByRegex src="$_rawmsg">
+      <regex><![CDATA[^\s*<:gPatSyslogPRI>?<_body:gPatMesgBody>]]></regex>
+    </collectFieldsByRegex>
+    <collectFieldsByKeyValuePair kvsep="=" sep=" " src="$_body">
+      <attrKeyMap attr="_action" key="action"/>
+      <attrKeyMap attr="_date" key="date"/>
+      <attrKeyMap attr="_deviceId" key="device_id"/>
+      <attrKeyMap attr="destIpAddr" key="dst"/>
+      <attrKeyMap attr="destIpPort" key="dst_port"/>
+      <attrKeyMap attr="httpUserAgent" key="http_agent"/>
+      <attrKeyMap attr="httpHost" key="http_host"/>
+      <attrKeyMap attr="httpMethod" key="http_method"/>
+      <attrKeyMap attr="sentBytes" key="http_request_bytes"/>
+      <attrKeyMap attr="httpRequestTime" key="http_request_time"/>
+      <attrKeyMap attr="recvBytes" key="http_response_bytes"/>
+      <attrKeyMap attr="httpResponseTimeMs" key="http_response_time"/>
+      <attrKeyMap attr="httpStatusCode" key="http_retcode"/>
+      <attrKeyMap attr="_infoURL" key="http_url"/>
+      <attrKeyMap attr="_logId" key="log_id"/>
+      <attrKeyMap attr="usrMsg" key="msg"/>
+      <attrKeyMap attr="policyName" key="policy"/>
+      <attrKeyMap attr="_severity" key="pri"/>
+      <attrKeyMap attr="_proto" key="proto"/>
+      <attrKeyMap attr="errReason" key="reason"/>
+      <attrKeyMap attr="serviceName" key="service"/>
+      <attrKeyMap attr="msg" key="smsg"/>
+      <attrKeyMap attr="srcIpAddr" key="src"/>
+      <attrKeyMap attr="srcIpPort" key="src_port"/>
+      <attrKeyMap attr="status" key="status"/>
+      <attrKeyMap attr="subtype" key="subtype"/>
+      <attrKeyMap attr="_time" key="time"/>
+      <attrKeyMap attr="_timezone" key="timezone"/>
+      <attrKeyMap attr="type" key="type"/>
+      <attrKeyMap attr="_user" key="user"/>
+      <attrKeyMap attr="vdom" key="vd"/>
+      <attrKeyMap attr="_usergroup" key="user_name"/>
+    </collectFieldsByKeyValuePair>
+    <collectFieldsByRegex src="$_date">
+      <regex><![CDATA[<_year:gPatYear>-<_mon:gPatMonNum>-<_day:gPatDay>]]></regex>
+    </collectFieldsByRegex>
+    <collectFieldsByRegex src="$_timezone">
+      <regex><![CDATA[^\(GMT<_tz:gPatStr>\)]]></regex>
+    </collectFieldsByRegex>
+    <when test="not_exist _tz">
+      <setEventAttribute attr="_tz">UTC</setEventAttribute>
+    </when>
+    <setEventAttribute attr="deviceTime">toDateTime($_mon, $_day, $_year, $_time, $_tz)</setEventAttribute>
+    <setEventAttribute attr="eventType">FortiWeb-Generic</setEventAttribute>
+    <switch>
+      <case>
+        <collectFieldsByRegex src="$_logId">
+          <regex><![CDATA[^0*<_logId:pat5Digit>$]]></regex>
+        </collectFieldsByRegex>
+      </case>
+      <default/>
+    </switch>
+    <setEventAttribute attr="eventType">combineMsgId("FortiWeb-", $_logId)</setEventAttribute>
+    <choose>
+      <when test='$_logId = "11006004"'>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$usrMsg">
+            <regex><![CDATA[interface <intfName:gPatStr> link <_status:gPatWord>]]></regex>
+            </collectFieldsByRegex>
+            <setEventAttribute attr="eventType">combineMsgId($eventType, "-", $_status)</setEventAttribute>
+          </case>
+          <default/>
+        </switch>
+      </when>
+      <when test='$_logId IN "11006005, 11006006"'>
+        <switch>
+          <case>
+            <!-- mem usage raise too high,mem(96)
+                 CPU usage raise too high,CPU(96)
+            -->
+            <collectFieldsByRegex src="$usrMsg">
+            <regex><![CDATA[\w+ usage raise too high(?:,\s*<_name:gPatWord>\(<_util:gPatInt>\))?]]></regex>
+            </collectFieldsByRegex>
+            <setEventAttribute attr="eventType">combineMsgId($eventType, "-high")</setEventAttribute>
+          </case>
+          <case>
+            <!-- mem usage reduced,mem(52)
+                 CPU usage reduced, CPU usage is 53
+            -->
+            <collectFieldsByRegex src="$usrMsg">
+            <regex><![CDATA[\w+ usage reduced(?:,\s*<_name:gPatWord>.*?<_util:gPatInt>)?]]></regex>
+            </collectFieldsByRegex>
+            <setEventAttribute attr="eventType">combineMsgId($eventType, "-low")</setEventAttribute>
+          </case>
+          <default/>
+        </switch>
+        <when test="exist _util">
+          <choose>
+        <when test="not_exist _name"/>
+            <when test='$_name = "mem"'>
+        <setEventAttribute attr="memUtil">$_util</setEventAttribute>
+      </when>
+      <when test='$_name = "CPU"'>
+        <setEventAttribute attr="cpuUtil">$_util</setEventAttribute>
+      </when>
+    </choose>
+        </when>
+      </when>
+    <when test='$_logId = "10000015"'>
+        <choose>
+          <when test='matches($usrMsg, "download Event LOG")'>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-download-log")</setEventAttribute>
+    </when>
+    <when test='matches($usrMsg, "download .* client certificate file")'>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-download-cert")</setEventAttribute>
+    </when>
+        </choose>
+      </when>
+    <when test='$_logId = "10000016"'>
+        <when test="exist status">
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-", $status)</setEventAttribute>
+    </when>
+      </when>
+    <when test='$_logId = "10000022"'>
+        <choose>
+          <when test='matches($usrMsg, "update virus signature")'>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-virus-database")</setEventAttribute>
+    </when>
+    <when test='matches($usrMsg, "update virus extend signature")'>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-extended-virus-database")</setEventAttribute>
+    </when>
+    <when test='matches($usrMsg, "update virus engine")'>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-virus-engine")</setEventAttribute>
+    </when>
+        </choose>
+      </when>
+    <when test='$_logId = "10000023"'>
+        <when test="exist _action">
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-", $_action)</setEventAttribute>
+    </when>
+      </when>
+    <when test='$_logId = "21000022"'>
+        <choose>
+          <when test='matches($usrMsg, "\bStopped\b")'>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-SYN-Flood-Stopped")</setEventAttribute>
+    </when>
+    <otherwise>
+      <setEventAttribute attr="eventType">combineMsgId($eventType, "-SYN-Flood-Start")</setEventAttribute>
+    </otherwise>
+        </choose>
+      </when>
+    <when test='$_logId = "20000055"'>
+      <switch>
+        <case>
+          <collectFieldsByRegex src="$usrMsg">
+            <regex><![CDATA[filename\s\[<fileName:gPatStrRightSB>]]></regex>
+          </collectFieldsByRegex>
+        </case>
+        <default/>
+      </switch>
+    </when>
+
+
+
+    </choose>
+    <when test="exist _proto">
+      <setEventAttribute attr="ipProto">convertStrToIntIpProto($_proto)</setEventAttribute>
+    </when>
+    <choose>
+      <when test="exist _usergroup">
+        <when test="$_usergroup = 'Unknown'"/>
+        <switch>
+          <case>
+            <collectFieldsByRegex src="$_usergroup">
+            <regex><![CDATA[<domain:gPatFqdn>[\\]<user:gPatWord>]]></regex>
+            </collectFieldsByRegex>
+          </case>
+          <default/>
+        </switch>
+      </when>
+      <when test="not_exist _user"/>
+      <when test="$_user = 'N/A'"/>
+      <otherwise>
+        <setEventAttribute attr="user">$_user</setEventAttribute>
+      </otherwise>
+    </choose>
+    <when test="exist sentBytes">
+      <when test="exist recvBytes">
+      <setEventAttribute attr="totBytes">add($sentBytes, $recvBytes)</setEventAttribute>
+    </when>
+    </when>
+    <choose>
+      <when test="not_exist _severity"/>
+      <when test='$_severity = "critical"'>
+        <setEventAttribute attr="eventSeverity">9</setEventAttribute>
+      </when>
+      <when test='$_severity = "alert"'>
+        <setEventAttribute attr="eventSeverity">7</setEventAttribute>
+      </when>
+      <when test='$_severity = "error"'>
+        <setEventAttribute attr="eventSeverity">5</setEventAttribute>
+      </when>
+      <when test='$_severity = "warning"'>
+        <setEventAttribute attr="eventSeverity">3</setEventAttribute>
+      </when>
+    </choose>
+    <when test="exist _infoURL">
+      <switch>
+        <case>
+          <collectFieldsByRegex src="$_infoURL">
+            <regex><![CDATA[CreateAttachmentFromLocalFile\&.*ID=-<actionId:gPatInt>]]></regex>
+          </collectFieldsByRegex>
+        </case>
+        <default/>
+      </switch>
+      <setEventAttribute attr="destName">extractHostFromURL($_infoURL)</setEventAttribute>
+    </when>
+</parsingInstructions>
